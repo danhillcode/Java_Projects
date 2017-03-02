@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring accessors="true" comment="Delete element from project &apos;Recursive&apos;&#x0A;- Original project: &apos;Recursive&apos;&#x0A;- Original element: &apos;Recursive/src/Worksheet1&apos;" description="Delete element" element1="/src&lt;Worksheet1" elements="1" flags="589830" id="org.eclipse.jdt.ui.delete" resources="0" stamp="1484403631576" subPackages="false" version="1.0"/>
+</session>

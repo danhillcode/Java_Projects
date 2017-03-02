@@ -1,0 +1,18 @@
+import javax.swing.JFrame;
+
+public class Draw {
+
+	public static void main(String[] args){
+		
+		
+		JFrame frame = new JFrame("Drawing Polygons");
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		Graphics polygonsJPanel = new Graphics();
+		frame.add(polygonsJPanel);
+		frame.setSize(280, 270);
+		frame.setVisible(true);
+		
+		
+	} 
+}

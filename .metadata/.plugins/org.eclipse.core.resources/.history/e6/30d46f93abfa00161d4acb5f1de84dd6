@@ -1,0 +1,63 @@
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.HashMap;
+
+public class ArtistAlt {
+
+	static HashMap<String, String> keys = new HashMap<String, String>();
+	
+	
+	//This mthod will read in CSV file store the album (in an array intially) and the album id(From an sql call) in a hash map,
+	//The album will then be checked against the key of the hash returning the id of the album
+	//Altertable will occur updating the artist table with the id values
+	
+	
+	public static void FindValues(){
+		
+		Connection c = null;
+		Statement stmt = null;
+		
+		Class.forName("org.postgresql.Driver");
+		c = DriverManager.getConnection("jdbc:postgresql://mod-fund-databases.cs.bham.ac.uk/djh639", "djh639",
+				"21jkmqarvr");
+
+		stmt = c.createStatement();
+			
+			String query = "SELECT DISTINCT * FROM songs";
+			// create the java statement
+			Statement st = c.createStatement();
+			// execute the query, and get a java resultset
+			ResultSet rs = st.executeQuery(query);
+
+			while (rs.next()) {
+				String id1 = rs.getString("id");
+				String song = rs.getString("song_name");
+				
+				
+				
+				keys.put(song, id1);
+				
+				
+			}
+	}
+		
+		
+		
+	
+	
+	public static void AlterTable(){
+		
+	}
+	
+	
+	
+	public static void main(String[] args) throws SQLException, ClassNotFoundException, IOException {
+
+	}
+	
+	
+}

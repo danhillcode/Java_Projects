@@ -1,0 +1,150 @@
+/**
+ * Daniel Hill
+ * 29/11/2016
+ * This is the Sudoku for work sheet 5. Exercise 4
+ */
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.Arrays;
+import java.util.Scanner;
+
+/**
+* This is the SudokuInteractive class which inherits from the super class Sudoku. The class is instantiated for use within the program and super is used to set the array.
+*/
+public class SudokuInteractive extends Sudoku  {
+	//private String file;
+	
+	public SudokuInteractive(int[][] array, String file) {
+		super(array);
+		//this.file = file;
+		// TODO Auto-generated constructor stub
+	}
+	
+	/**
+	 * This is the play method which is a void type and allows the user to play Sudoku. it throws IllegalArgumentException and IOException.
+	 * @param String File
+	 */	
+	
+	public static void play(String File) throws IllegalArgumentException, IOException {
+
+/**
+ * sets bigArray which is the array we will alter and return as the final sudoku		
+ */
+int [][] bigArray = new int [9][9];
+int [][] correctArray =  {{1, 2, 3, 4, 5 , 6, 7 , 8 ,9 },
+		{4 , 5 , 6 , 7 , 8 , 9 , 1 , 2 , 3 },
+		{7 , 8 , 9 , 1 , 2 , 3 , 4 , 5 , 6}, 
+		{ 2 , 3 , 4 , 5 , 6 , 7 , 8 , 9 , 1 }, 
+		{ 5 , 6 , 7 , 8 , 9 , 1 , 2 , 3 , 4 }, 
+		{ 8 , 9 , 1 , 2 , 3 , 4 , 5 , 6 , 7 }, 
+		{ 3 , 4 , 5 , 6 , 7 , 8 , 9 , 1 , 2 }, 
+		{ 6 ,  7 , 8 , 9 , 1 , 2 , 3 , 4 , 5}, 
+		{ 9 , 1 , 2 , 3 , 4 , 5 , 6 , 7 , 8}}; 
+		
+/**
+ * This is the reader which reads in a file and converts it to a sudoku format. 		
+ */
+		try{ 
+			BufferedReader br = new BufferedReader(new FileReader(File)); 
+			for(int i = 0; i < 9; i++){
+			String reader = br.readLine();
+			reader = reader.replaceAll(" ", "0");
+			String [] array;
+			array = reader.split("");
+			
+			if (array.length != 9){
+				br.close();
+				// new InputMismatchException();   	
+			}
+			
+			
+			for (int j = 0; j < 9; j++){
+				
+				bigArray[i][j] = Integer.parseInt(array[j]);
+			}
+			
+			
+		    }
+			br.close();
+		}
+		
+			 catch (IOException e){
+			 System.out.println("File not found");
+		 }
+		
+			
+		
+	    Scanner input = new Scanner(System.in);
+	    Scanner input2 = new Scanner(System.in);
+	    System.out.println("Input the value for sudoku:" + "\n" +  "It should be in the form of A1:1." + "\n" + "This is a practice run so enter the correct input and you will enter the game good luck"); 
+	
+	    
+	    String check = "";
+	    String inputs = input.next(); 
+	    if (inputs.matches("([A-Z])([0-8])(:)([0-8])")){ 
+	    	System.out.println(check = "Valid input");}
+	    else { System.out.println(check = "Please play again and enter a valid input e.g. A1:1");} 
+	
+/** This is the start of the while loop which does the which checks for a valid input or an input which is equal to the regular expression that is used to check the input
+ * 
+ */
+	    int count = 1;
+        while (check.equals("Valid input")) {
+            
+        	Scanner input3 = new Scanner(System.in);
+    	    System.out.println("Input the value for sudoku:" + "\n"); 
+    	    String input4 = input3.next();
+    	
+    	    
+ /** This is an if statement that finds the character for each of the inputs and updates the bigArray for those values. 	
+  *     
+  */
+    	    if (input4.matches("([A-Z])([0-8])(:)([0-8])")){ 
+    	    	System.out.println("Valid input" );
+    	    	//System.out.println("The char at" + input4.charAt(0));
+    	    	//System.out.println(Character.getNumericValue(A));
+    	    	
+    	    	int firstNum = Character.getNumericValue(((input4.charAt(0))-Character.getNumericValue('A'))-7);
+    	    	System.out.println(firstNum);
+    	    	
+    	    	int secondNum = Character.getNumericValue(input4.charAt(1));
+    	    	System.out.println(secondNum);
+    	    	//System.out.println(input4.charAt(3));
+    	    	int thirdNum = Character.getNumericValue(input4.charAt(3));
+    	    	System.out.println(thirdNum);
+    	    	bigArray[firstNum][secondNum] = thirdNum;
+    	    	Sudoku a1 = new Sudoku (bigArray);
+    	    	System.out.print(Arrays.deepToString(bigArray));
+    	    	System.out.print(a1);
+    	    	;}
+    	    	
+    	    else { System.out.println("Please enter a valid input e.g. A1:1");} 
+    	
+ /** This is an if statement that checks if the user enters 'exit' so the game is exited if the condition is true.
+  * 
+  */
+    	    if (input4.matches("exit")){ 
+    	    	System.out.println("Exiting the game");
+    	    	break;}
+    	    
+    	    if(bigArray[0][0] == correctArray[0][0]){
+        		System.out.println("\n" + "*************************Well done you completed the Sudoku******************************");
+        		break;
+        	} 		
+
+            count++;
+            
+        }	
+	}
+
+	public static void main(String[] args)  {
+		try {
+			play("./src/badsudoku.txt");
+		} catch (IllegalArgumentException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+}
+

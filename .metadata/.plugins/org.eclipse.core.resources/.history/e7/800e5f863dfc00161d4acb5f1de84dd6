@@ -1,0 +1,49 @@
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.HashMap;
+
+public class ArtistAlt {
+
+	static HashMap<String, String> keys = new HashMap<String, String>();
+	static Connection c = null;
+	static Statement stmt = null;
+	static ArrayList<String> artists = new ArrayList<String>();
+	static ArrayList<String> albums = new ArrayList<String>();
+	
+	//This mthod will read in CSV file store the album (in an array intially) and the album id(From an sql call) in a hash map,
+	//The album will then be checked against the key of the hash returning the id of the album
+	//Altertable will occur updating the artist table with the id values
+	
+	
+	public static void AlterTable() throws SQLException, ClassNotFoundException{
+		
+		Class.forName("org.postgresql.Driver");
+		c = DriverManager.getConnection("jdbc:postgresql://mod-fund-databases.cs.bham.ac.uk/djh639", "djh639",
+				"21jkmqarvr");
+
+		stmt = c.createStatement();
+		
+		PreparedStatement pst = null;
+		String stm = "ALTER TABLE Artists DROP COLUMN album_id";
+		pst = c.prepareStatement(stm);
+		System.out.println("Column dropped");
+		pst.executeUpdate();
+		
+		
+	}
+	
+	
+	
+	public static void main(String[] args) throws SQLException, ClassNotFoundException, IOException {
+
+		AlterTable();
+	}
+	
+	
+}

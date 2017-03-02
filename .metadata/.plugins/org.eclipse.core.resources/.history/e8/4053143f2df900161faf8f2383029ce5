@@ -1,0 +1,82 @@
+
+import java.util.concurrent.LinkedBlockingQueue;
+
+public class SimpleThreadPool implements ISimpleThreadPool {
+
+private LinkedBlockingQueue<ISimpleTask> queue = new LinkedBlockingQueue<>();
+
+//type of object
+private Thread[] Threads;
+
+/*
+@Override
+public void start() {
+	//(new Thread(new SimplePoolThread(queue))).start();
+}
+*/
+
+
+@Override
+public void start() {
+
+	LinkedBlockingQueue<ISimpleTask> nTask = new LinkedBlockingQueue<ISimpleTask>();
+	Threads = new Thread[10];
+	
+	for (int i=0; i<11; i++){
+		
+		Threads[i] = new Thread(new SimplePoolThread(nTask));
+		Threads[i].start();
+	}
+}
+
+@Override
+public void stop() {
+	for(Thread thread : this.Threads) {
+        thread.interrupt();
+    }
+
+}
+
+
+
+
+	
+
+/*
+    
+    @Override
+    public void stop() {
+        try {
+            queue.take();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        
+    }
+   */ 
+
+    /*
+    @Override
+    public void addTask(Object object) { 
+
+        try {
+            queue.put(object);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+    */
+
+	@Override
+	public void run() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void addTask(ISimpleTask task) {
+		// TODO Auto-generated method stub
+		
+	}
+}

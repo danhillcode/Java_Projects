@@ -1,0 +1,147 @@
+
+
+//package JdbcPostgresqlConnection;
+
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.TreeMap;
+import java.util.TreeSet;
+
+import com.opencsv.CSVReader;
+
+public class Songs extends Albums {
+
+	//static TreeMap<String, String> keys = new TreeMap<String, String>();
+	static ArrayList<String> album = new ArrayList<String>();
+	static ArrayList<String> song = new ArrayList<String>();
+	static HashMap<String, String> keys = new HashMap<String, String>();
+	static Connection c = null;
+	static Statement stmt = null;
+
+	//Inserts and creates the artists table
+	/**
+	 * @throws FileNotFoundException
+	 * @throws SQLException
+	 * @throws ClassNotFoundException
+	 */
+	public static void statements1() throws FileNotFoundException, SQLException, ClassNotFoundException{
+
+		//DATABASE CONNECTION
+
+		
+
+		try {
+
+			Class.forName("org.postgresql.Driver");
+			c = DriverManager
+					.getConnection("jdbc:postgresql://mod-fund-databases.cs.bham.ac.uk/djh639","djh639", "21jkmqarvr");
+
+			stmt = c.createStatement();
+			stmt.execute("DROP TABLE Songs");
+			System.out.println("Creating table in given database...");
+
+			String sql2 = "CREATE TABLE Songs " + "(id serial UNIQUE primary key, " +
+					" song_name Text not NULL, " + " album_id Text not NULL )" ;
+
+
+
+			//execute create tables
+			stmt.executeUpdate(sql2);
+			//stmt.executeUpdate(sql1);stmt.executeUpdate(sql2);stmt.executeUpdate(sql3);
+			System.out.println("Created table in given database...");
+
+
+			System.out.println("Created ID in given database...");
+		}
+
+		catch (Exception e) {
+			e.printStackTrace();
+			System.err.println("error");
+			System.exit(0);
+		}
+		System.out.println("Opened");
+	}
+	
+	
+	
+	
+
+
+	
+	
+	
+	
+
+	public static void statements2() throws FileNotFoundException, SQLException, ClassNotFoundException{
+		
+		Connection c1 = DriverManager
+				.getConnection("jdbc:postgresql://mod-fund-databases.cs.bham.ac.uk/djh639","djh639", "21jkmqarvr");
+
+		for(int i = 0; i < album.size(); i++){
+		String sql = "SELECT * FROM albums where album_name = (?) ";
+		PreparedStatement pst1 =  c1.prepareStatement(sql);
+		pst1.setString(1, album.get(i));
+		//pst1.executeUpdate();
+		//pst1.close();
+		ResultSet rs = pst1.executeQuery();
+		
+		
+		
+		
+		while (rs.next()) {
+			String id1 = rs.getString("id");
+			String album_name = rs.getString("album_name");
+			System.out.println("this is: " + id1);
+			System.out.println("this is: " + album_name);
+			
+			if(keys.containsKey(id1)){
+				System.out.println("Already in..");
+			}else{
+			keys.put(id1, album_name);
+			}
+		}
+		pst1.close();
+		}
+		
+		
+		/*
+		Statement stmt = c1.createStatement();
+	    String query = "select * from albums";
+	    ResultSet rs =  stmt.executeQuery(query);
+		
+	
+		
+		*/
+		
+		//stmt.close();
+		System.out.println(song);
+		
+		}
+		
+		
+		
+		
+		
+	
+		
+	
+
+
+	public static void main(String[] args) throws SQLException, FileNotFoundException, ClassNotFoundException{
+
+		statements1();
+		statements2();
+		System.out.println(keys.get("551"));
+	}	
+}

@@ -1,0 +1,27 @@
+
+import java.awt.Polygon;
+import java.awt.Graphics;
+import java.awt.Color;
+import javax.swing.JPanel;
+
+public class Graphics extends JPanel {
+
+	public void paintComponent(java.awt.Graphics g){
+		super.paintComponent(g);
+		
+			g.setColor(Color.BLUE);
+			 g.drawRect(1,2,2,1);
+			 g.fillRect(1, 2, 2, 1);
+			 g.setColor(Color.GREEN);
+		
+		
+		Polygon polygon2 = new Polygon();
+		polygon2.addPoint(3, 1);
+		polygon2.addPoint(3, 2);
+		polygon2.addPoint(4, 2);
+		
+		g.fillPolygon(polygon2);
+	}
+	
+	
+}

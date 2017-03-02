@@ -1,0 +1,216 @@
+
+
+	//package JdbcPostgresqlConnection;
+
+
+	import java.io.FileNotFoundException;
+	import java.io.FileReader;
+	import java.io.IOException;
+	import java.sql.Connection;
+	import java.sql.DriverManager;
+	import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+	import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.TreeMap;
+import java.util.TreeSet;
+
+import com.opencsv.CSVReader;
+	 
+	public class SongsAlter {
+	
+		static TreeMap<String, String> keys = new TreeMap<String, String>();
+		static ArrayList<String> album = new ArrayList<String>();
+		static ArrayList<String> song = new ArrayList<String>();
+	  
+		//Inserts and creates the artists table
+		public static void statements1() throws FileNotFoundException, SQLException, ClassNotFoundException{
+	    	   
+	    	 //DATABASE CONNECTION
+	    	 
+	    	 Connection c = null;
+		    Statement stmt = null;
+	         
+	  	        try {
+	  	         
+	  	         Class.forName("org.postgresql.Driver");
+	  	         c = DriverManager
+	  	            .getConnection("jdbc:postgresql://mod-fund-databases.cs.bham.ac.uk/djh639","djh639", "21jkmqarvr");
+	  	      
+	  	         stmt = c.createStatement();
+	  	       System.out.println("Creating table in given database...");
+	  	   
+	  	       
+	  	       
+				// Adds the serial
+				  String sql = "CREATE TABLE Artists " + "(id serial primary key," +
+				  " artist_name UNIQUE TEXT not NULL, " + "  Album_ID TEXT not NULL, " +
+				  "  Tag_ID INTEGER not NULL )" ;
+				  //foreign key = id of another table
+				  
+				  
+				  String sql1 = "CREATE TABLE Albums " + "(id serial primary key, " +
+				  " album_name Int not NULL, " + "  artist_name TEXT not NULL )";
+				  
+				  
+				  String sql2 = "Alter TABLE Songs " + "(id serial UNIQUE primary key, " +
+				  " song_name Text not NULL, " + " album_id Text not NULL )" ;
+				  
+				  String sql3 = "CREATE TABLE Tags " + "(id INTEGER not NULL, " +
+				  " tag_description TEXT not NULL, " +
+				  " song_ID INTEGER not NULL, " + " album_ID INTEGER not NULL, " +
+				  " PRIMARY KEY ( id ))";
+				  
+	  	    //execute create tables
+	  	     stmt.executeUpdate(sql2);
+	  	     //stmt.executeUpdate(sql1);stmt.executeUpdate(sql2);stmt.executeUpdate(sql3);
+	  	      System.out.println("Created table in given database...");
+	  	   
+	  	      
+	  	   
+	  	   
+	  	      //Drop all tables
+	  	   //stmt.execute("DROP TABLE Tags");stmt.execute("DROP TABLE Songs");stmt.execute("DROP TABLE Albums");
+	  	   //stmt.execute("DROP TABLE Artists");
+	  	   System.out.println("Created ID in given database...");
+	  	        }
+	  	         
+	  	 catch (Exception e) {
+	  		 e.printStackTrace();
+	  		 System.err.println("error");
+	  		 System.exit(0);
+	  	 }
+	  	 System.out.println("Opened");
+	     
+	  	 
+	  	 /*
+	  	  * SQL query for the album ID
+	  	  */
+	  	  
+	  	 
+	  	 //song and its album <song, album>
+	  	 //song dont need a query
+	  	
+	  	 
+	  	PreparedStatement pst = null;
+		Statement st = c.createStatement();
+		
+
+		        
+		    
+			ResultSet rs1 = st.executeQuery("SELECT id FROM albums");
+			
+			//ResultSet rs1 = st.executeQuery("SELECT id FROM albums");
+		    
+			
+		   while(rs1.next()){
+		    	
+		    	
+		    	//System.out.println(nextLine[0]);
+		        System.out.println((rs1.getString(1)));
+		        //System.out.println("hey" +(rs2.getString(1)));
+		        album.add(rs1.getString(1));
+		}
+		   rs1.close();
+		   
+		   
+		   
+		 ResultSet rs2 = st.executeQuery("SELECT id FROM artists1");
+		   while(rs2.next()){
+		    	
+		    	
+		    	//System.out.println(nextLine[0]);
+		        System.out.println((rs2.getString(1)));
+		        //System.out.println("hey" +(rs2.getString(1)));
+		        song.add(rs2.getString(1));
+		        
+		    
+		}
+		  
+		   rs2.close();
+		   
+		  
+		   
+		   
+		   
+		  
+	       
+		
+	
+	  	 
+	  	 
+	  	 
+	  	 
+	  	 
+	  	 
+	  	 
+	  	//READ IN CSV FILE
+		 CSVReader reader = new CSVReader(new FileReader("lib/artists-songs-albums-tags.csv"), ',' , '"' , 1);
+			// Read CSV line by line and use the string array as you want
+			String[] nextLine;
+			
+			
+			int id = 1;
+			try {
+				while ((nextLine = reader.readNext()) != null) {
+
+					//System.out.println(keys);
+					
+					String song_name = nextLine[0];
+					int album_id = 0;
+					//System.out.println("running: " + id);
+					id = id + 1;
+					//hashmap putting in song and album
+					//keys.put(nextLine[0], nextLine[2]);
+					
+					   String stm = "INSERT INTO Songs (song_name, album_id) VALUES(?, ?)";
+			  	        pst = c.prepareStatement(stm);
+			  	        pst.setString(1, song_name);
+			  	       //OPEN
+			  	        pst.setString(2, song_name );
+			  	        pst.executeUpdate(); 
+			  	        st.close();
+					
+					//OPEN
+					
+					/*
+					//String album_name = keys.get(id);
+					 id = id + 1;
+					
+		  	        		  
+					String query = "SELECT * FROM artists1";
+					// create the java statement
+					
+					// execute the query, and get a java resultset
+					ResultSet rs = st.executeQuery(query);
+
+					*/
+				}
+				
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			catch(ArrayIndexOutOfBoundsException e2){
+				System.out.println("Arrays");
+			}
+
+	     
+	}
+	  	 
+	     public static void main(String[] args) throws SQLException, FileNotFoundException, ClassNotFoundException{
+	   
+	    	
+				statements1();
+				System.out.println(album);
+				System.out.println(song);
+				System.out.println(album.size());
+				System.out.println(song.size());
+				
+	     }
+	
+}

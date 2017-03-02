@@ -1,0 +1,95 @@
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.HashMap;
+
+import com.opencsv.CSVReader;
+
+public class Questions_Table {
+
+	public static void createTableQuestions() throws FileNotFoundException, SQLException, ClassNotFoundException, IOException {
+
+		// DATABASE CONNECTION
+
+		Connection c = null;
+		Statement stmt = null;
+
+		try {
+
+			Class.forName("org.postgresql.Driver");
+			c = DriverManager.getConnection("jdbc:postgresql://mod-fund-databases.cs.bham.ac.uk/djh639", "djh639",
+					"21jkmqarvr");
+
+			stmt = c.createStatement();
+			System.out.println("Creating table in given database...");
+
+			//stmt.execute("DROP TABLE Questions");
+			// Adds the serial
+			String sql = "CREATE TABLE Questions " + "(id serial UNIQUE primary key," + " question_description TEXT not NULL, "
+					+ "  Answer1 TEXT not NULL," +  "Answer2 TEXT not NULL," +  "Answer3 TEXT not NULL," +  "Correct_Answer TEXT not NULL )";
+			// foreign key = id of another table
+
+			// execute create tables
+			//stmt.executeUpdate(sql);
+			// stmt.executeUpdate(sql1);stmt.executeUpdate(sql2);stmt.executeUpdate(sql3);
+			System.out.println("Created table in given database...");
+
+			System.out.println("Created ID in given database...");
+		}
+
+		catch (Exception e) {
+			e.printStackTrace();
+			System.err.println("error");
+			System.exit(0);
+		}
+		System.out.println("Opened");
+	
+		/*
+		//READ IN CSV FILE
+				CSVReader reader = new CSVReader(new FileReader("lib/Questions - Sheet1.csv"), ',' , '"' , 1);
+				// Read CSV line by line and use the string array as you want
+				String[] nextLine;
+
+				int id = 1;
+				try {
+					while ((nextLine = reader.readNext()) != null) {
+
+						System.out.println(nextLine[0]);
+						System.out.println(nextLine[1]);
+						System.out.println(nextLine[2]);
+						
+						
+						//search database table albums where album_id = album_id(variable) bring back id
+					}
+
+					
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				catch(ArrayIndexOutOfBoundsException e2){
+					System.out.println("Arrays");
+				}
+*/
+			}
+	
+	
+	
+	
+
+
+
+
+
+	public static void main(String[] args) throws SQLException, ClassNotFoundException, IOException {
+	
+		createTableQuestions();
+	}
+
+}
+

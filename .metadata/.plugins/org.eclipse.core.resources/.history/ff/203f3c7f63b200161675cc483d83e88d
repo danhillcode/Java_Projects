@@ -1,0 +1,9 @@
+
+public class Sudoku {
+
+	private int[][] array;
+	
+	public Sudoku(int[][] array){
+		
+	}
+}

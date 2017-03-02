@@ -1,0 +1,21 @@
+package predictive;
+import static predictive.PredictivePrototype.wordToSignature;
+
+/**
+ * A class that imports a method from the predictiveprototype class for a command line prototype
+ * @author Ryan Bland
+ * @version 02/05/17
+ */
+
+public class Words2SigProto {
+	
+	/**
+	 * A main method that takes args from the command line and returns the signature of the word
+	 * @param args
+	 */
+	public static void main(String[] args){
+		for (String s: args){
+			System.out.println(wordToSignature(s));
+		}		 
+	}
+}

@@ -1,0 +1,10 @@
+
+public class Sudoku {
+
+	private int[9][9] array;
+	
+	public Sudoku(int[9][9] array){
+		this.array = array;
+	}
+	
+}

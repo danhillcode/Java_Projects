@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename method &apos;Worksheet1.removeDuplictes(...)&apos; to &apos;removeDuplicates&apos;&#x0A;- Original project: &apos;Recursive&apos;&#x0A;- Original element: &apos;Worksheet1.removeDuplictes(...)&apos;&#x0A;- Renamed element: &apos;Worksheet1.removeDuplicates(...)&apos;&#x0A;- Update references to refactored element" delegate="false" deprecate="false" description="Rename method &apos;removeDuplictes&apos;" flags="589830" id="org.eclipse.jdt.ui.rename.method" input="/src&lt;{Worksheet1.java[Worksheet1~removeDuplictes~QList;" name="removeDuplicates" references="true" stamp="1485005855260" version="1.0"/>
+</session>

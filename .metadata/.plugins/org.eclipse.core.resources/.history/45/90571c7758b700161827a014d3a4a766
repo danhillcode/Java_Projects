@@ -1,0 +1,76 @@
+/**
+ * Daniel Hill
+ * 29/11/2016
+ * This is the Sudoku for work sheet 5. Exercise 1 
+ */
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.Arrays;
+
+
+//sudoku as a double array and return as a Sudoku type  
+//sudoku 
+
+public class SudokuRead extends Sudoku {
+
+	public SudokuRead(int[][] array){
+		super(array);
+	}
+		
+	
+	
+	//change this to type Sudoku
+	public static Sudoku readSudoku(String BadSudokuFile) throws IllegalArgumentException, IOException {
+	
+		int [][] bigArray = new int [9][9];
+		
+		
+		try{ 
+			BufferedReader br = new BufferedReader(new FileReader(BadSudokuFile)); 
+			for(int i = 0; i < 9; i++){
+			String reader = br.readLine();
+			reader = reader.replaceAll(" ", "0");
+			String [] array;
+			array = reader.split("");
+			
+			if (array.length != 9){
+				br.close();
+				// new InputMismatchException();   	
+			}
+			
+			
+			for (int j = 0; j < 9; j++){
+				
+				bigArray[i][j] = Integer.parseInt(array[j]);
+			}
+			
+			
+		    }
+			br.close();
+		}
+		
+			 catch (IOException e){
+			 System.out.println("File not found");
+		 }
+			
+		Sudoku a1 = new Sudoku (bigArray);
+			
+			
+			System.out.print(Arrays.deepToString(bigArray));
+			
+		return a1;
+	}
+	
+		public static void main(String[] args) {
+				try {
+					System.out.println(readSudoku("./src/badsudoku.txt"));
+				} catch (IllegalArgumentException | IOException e) {
+					
+					e.printStackTrace();
+				}
+				
+			}
+}	
+	
+

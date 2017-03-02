@@ -1,0 +1,108 @@
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.HashMap;
+
+import com.opencsv.CSVReader;
+
+public class Questions_Table {
+
+	public static void createTableQuestions() throws FileNotFoundException, SQLException, ClassNotFoundException {
+
+		// DATABASE CONNECTION
+
+		Connection c = null;
+		Statement stmt = null;
+
+		try {
+
+			Class.forName("org.postgresql.Driver");
+			c = DriverManager.getConnection("jdbc:postgresql://mod-fund-databases.cs.bham.ac.uk/djh639", "djh639",
+					"21jkmqarvr");
+
+			stmt = c.createStatement();
+			System.out.println("Creating table in given database...");
+
+			stmt.execute("DROP TABLE Artists");
+			// Adds the serial
+			String sql = "CREATE TABLE Artists " + "(id serial UNIQUE primary key," + " artist_name TEXT not NULL, "
+					+ "  Album_ID TEXT not NULL )";
+			// foreign key = id of another table
+
+			// execute create tables
+			stmt.executeUpdate(sql);
+			// stmt.executeUpdate(sql1);stmt.executeUpdate(sql2);stmt.executeUpdate(sql3);
+			System.out.println("Created table in given database...");
+
+			System.out.println("Created ID in given database...");
+		}
+
+		catch (Exception e) {
+			e.printStackTrace();
+			System.err.println("error");
+			System.exit(0);
+		}
+		System.out.println("Opened");
+	}
+	
+	/*
+	
+	// READ IN CSV FILE
+	CSVReader reader = new CSVReader(new FileReader("lib/artists-songs-albums-tags.csv"), ',', '"', 1);
+	// Read CSV line by line and use the string array as you want
+	HashMap<String, String> hmap = new HashMap<String, String>();
+	
+	String[] nextLine;
+	int id = 0;
+	PreparedStatement pst = null;
+
+	try {
+		while ((nextLine = reader.readNext()) != null) {
+
+			// read all into a hashmap and then do a check to see if in
+			// hashmap do the prepared statement then prepared statement
+
+			Integer Tag_ID = nextLine[2].hashCode();
+			System.out.println(nextLine[2].hashCode());
+			
+			 System.out.println("filling table");
+			 System.out.println(hmap);
+			id = id + 1;
+
+			String album_name = nextLine[2];
+			String artist_name = nextLine[1];
+
+			
+
+			if (hmap.containsValue(nextLine[2]) && hmap.containsKey(nextLine[1])) {
+				// System.out.println(nextLine[2]);
+				// System.out.println(nextLine[1]);
+				System.out.println("Already in list");
+			} else {
+
+				
+
+			}
+
+		}
+	} catch (IOException e1) {
+		// TODO Auto-generated catch block
+		e1.printStackTrace();
+	}
+
+*/
+
+
+
+	public static void main(String[] args) throws SQLException, ClassNotFoundException, IOException {
+	
+		createTableQuestions();
+	}
+
+}
+

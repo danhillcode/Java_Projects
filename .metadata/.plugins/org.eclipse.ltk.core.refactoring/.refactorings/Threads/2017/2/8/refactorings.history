@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename local variable &apos;thread&apos; in &apos;SimpleThreadPool.start()&apos; to &apos;th&apos;&#x0A;- Original project: &apos;Threads&apos;&#x0A;- Original element: &apos;SimpleThreadPool.start().thread&apos;&#x0A;- Renamed element: &apos;thread&apos;&#x0A;- Update references to refactored element" description="Rename local variable &apos;thread&apos;" id="org.eclipse.jdt.ui.rename.local.variable" input="/src&lt;{SimpleThreadPool.java[SimpleThreadPool~start@thread!497!552!504!509!QThread;!0!false" name="th" references="true" stamp="1487868966338" version="1.0"/>
+</session>

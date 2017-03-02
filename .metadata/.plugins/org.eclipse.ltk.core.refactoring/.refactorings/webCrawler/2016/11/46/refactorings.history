@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy 2 elements to &apos;ExamQuestion/src/(default package)&apos;&#x0A;- Original project: &apos;webCrawler&apos;&#x0A;- Destination element: &apos;ExamQuestion/src/(default package)&apos;&#x0A;- Original elements:&#x0A;     WebCrawler.java&#x0A;     WCTest.java" description="Copy compilation units" destination="=ExamQuestion/src&lt;" element1="/src&lt;{WebCrawler.java" element2="/src&lt;{WCTest.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1479390044947" units="2" version="1.0"/>
+</session>

@@ -1,0 +1,13 @@
+bad
+bat
+cat
+dog
+pig
+fox
+home
+good*
+hello
+eat
+gone
+bat
+fat

@@ -1,0 +1,14 @@
+eclipse.preferences.version=1
+firstStartup=false
+history.comment=Q2hhbmdlZCBwcm9qZWN0IG5hbWUg;SGV5IGd1eXMgY2hlY2sgb3V0IG15IHB1c2g\=
+history.repositoryURL=aHR0cHM6Ly9jb2RleC5jcy5iaGFtLmFjLnVrL3N2bi9tb2R1bGVzLzIwMTYvbXNjLXN3L3B1bmUv
+history.selectCheckoutUrl=aHR0cHM6Ly9jb2RleC5jcy5iaGFtLmFjLnVrL3N2bi9tb2R1bGVzLzIwMTYvbXNjLXN3L3B1bmU\=
+org.eclipse.team.svn.ui.panel.callback.AskTrustSSLServerPanel.height=250
+org.eclipse.team.svn.ui.panel.callback.AskTrustSSLServerPanel.width=530
+org.eclipse.team.svn.ui.panel.callback.PromptCredentialsPanel.height=231
+org.eclipse.team.svn.ui.panel.callback.PromptCredentialsPanel.width=470
+org.eclipse.team.svn.ui.panel.local.CommitPanel.height=406
+org.eclipse.team.svn.ui.panel.local.CommitPanel.width=600
+org.eclipse.team.svn.ui.panel.reporting.ErrorCancelPanel.height=131
+org.eclipse.team.svn.ui.panel.reporting.ErrorCancelPanel.width=640
+preference.repository.repositoryBrowser=false

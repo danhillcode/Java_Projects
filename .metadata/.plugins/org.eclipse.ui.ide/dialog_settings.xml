@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<list key="org.eclipse.ui.internal.wizards.datatransfer.SmartImportRootWizardPage.knownSources">
+		<item value="/Users/danielhill/Downloads/djh639-WS1-5-2"/>
+		<item value="/Users/danielhill/Documents/workspace/Vehicle/src"/>
+		<item value="/Users/danielhill/Documents/workspace/Measure"/>
+		<item value="/Users/danielhill/Documents/workspace/Measure/src"/>
+	</list>
+	<section name="ExternalProjectImportWizard">
+	</section>
+	<section name="ResourceNavigator">
+		<item value="Aggregate for window 1476575202004" key="ResourceWorkingSetFilter.STORE_WORKING_SET"/>
+		<item value="1" key="ResourceViewer.STORE_SORT_TYPE"/>
+	</section>
+	<section name="NewWizardAction">
+		<item value="org.eclipse.m2e.core.wizards.Maven2ProjectWizard" key="NewWizardSelectionPage.STORE_SELECTED_ID"/>
+		<list key="NewWizardSelectionPage.STORE_EXPANDED_CATEGORIES_ID">
+			<item value="org.eclipse.ui.Basic"/>
+			<item value="org.eclipse.jdt.ui.java"/>
+			<item value="org.eclipse.fx.ide"/>
+			<item value="org.eclipse.m2e"/>
+		</list>
+	</section>
+	<section name="BasicNewProjectResourceWizard">
+	</section>
+	<section name="SaveAsDialogSettings">
+		<item value="527" key="DIALOG_WIDTH"/>
+		<item value="1|.SF NS Text|11.0|0|COCOA|1|.SFNSText-Regular" key="DIALOG_FONT_NAME"/>
+		<item value="532" key="DIALOG_HEIGHT"/>
+		<item value="398" key="DIALOG_X_ORIGIN"/>
+		<item value="22" key="DIALOG_Y_ORIGIN"/>
+	</section>
+</section>

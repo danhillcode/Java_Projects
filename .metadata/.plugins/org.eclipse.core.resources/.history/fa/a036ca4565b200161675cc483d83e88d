@@ -1,0 +1,35 @@
+import java.util.Arrays;
+
+public class Sudoku {
+
+	private int[][] array;
+	
+	public Sudoku(int[][] array){
+		this.array = array;
+	}
+	
+	public int[][] getArray() {
+		return array;
+	}
+
+	@Override
+	public String toString() {
+		return "Sudoku [array=" + Arrays.toString(array) + "]";
+	}
+
+	public void setArray(int[][] array) {
+		this.array = array;
+	}
+	
+	public boolean isFilled(int[][] array){
+		
+		return true;
+	}
+
+	public static void main(String[] args){
+	    
+		//System.out.println(array.getArray());
+		
+	}
+	
+}

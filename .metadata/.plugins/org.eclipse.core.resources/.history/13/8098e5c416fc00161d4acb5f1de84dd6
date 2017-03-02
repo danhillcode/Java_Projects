@@ -1,0 +1,54 @@
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+public class Games_Table {
+
+	public static void createTableItems() throws FileNotFoundException, SQLException, ClassNotFoundException {
+
+		// DATABASE CONNECTION
+
+		Connection c = null;
+		Statement stmt = null;
+
+		try {
+
+			Class.forName("org.postgresql.Driver");
+			c = DriverManager.getConnection("jdbc:postgresql://mod-fund-databases.cs.bham.ac.uk/djh639", "djh639",
+					"21jkmqarvr");
+
+			stmt = c.createStatement();
+			System.out.println("Creating table in given database...");
+
+			//stmt.execute("DROP TABLE Items");
+			// Adds the serial
+			String sql = "CREATE TABLE Items " + "(id serial UNIQUE primary key," + " item_name TEXT not NULL, "
+					+ "  Users_ID int REFERENCES Users(id) )";
+			// foreign key = id of another table
+
+			// execute create tables
+			stmt.executeUpdate(sql);
+			// stmt.executeUpdate(sql1);stmt.executeUpdate(sql2);stmt.executeUpdate(sql3);
+			System.out.println("Created table in given database...");
+
+			System.out.println("Created ID in given database...");
+		}
+
+		catch (Exception e) {
+			e.printStackTrace();
+			System.err.println("error");
+			System.exit(0);
+		}
+		System.out.println("Opened");
+	}
+	
+	public static void main(String[] args) throws SQLException, ClassNotFoundException, IOException {
+
+		createTableItems();
+	}
+	
+}

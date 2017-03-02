@@ -1,0 +1,113 @@
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.HashMap;
+
+public class ArtistAlt {
+
+	static HashMap<String, String> keys = new HashMap<String, String>();
+	static Connection c = null;
+	static Statement stmt = null;
+	static ArrayList<String> artists = new ArrayList<String>();
+	static ArrayList<String> albums = new ArrayList<String>();
+	
+	//This mthod will read in CSV file store the album (in an array intially) and the album id(From an sql call) in a hash map,
+	//The album will then be checked against the key of the hash returning the id of the album
+	//Altertable will occur updating the artist table with the id values
+	
+	
+	public static void FindValuesAlbums() throws SQLException, ClassNotFoundException{
+		
+		Connection c = null;
+		Statement stmt = null;
+		
+		Class.forName("org.postgresql.Driver");
+		c = DriverManager.getConnection("jdbc:postgresql://mod-fund-databases.cs.bham.ac.uk/djh639", "djh639",
+				"21jkmqarvr");
+
+		stmt = c.createStatement();
+			
+			String query = "SELECT * FROM albums";
+			// create the java statement
+			Statement st = c.createStatement();
+			// execute the query, and get a java resultset
+			ResultSet rs = st.executeQuery(query);
+
+			while (rs.next()) {
+				String id1 = rs.getString("id");
+				String album = rs.getString("album_name");
+				
+				keys.put(album, id1);
+				
+			}
+	}
+	
+public static void FindValuesArtists() throws SQLException, ClassNotFoundException{
+		
+		Connection c = null;
+		Statement stmt = null;
+		
+		Class.forName("org.postgresql.Driver");
+		c = DriverManager.getConnection("jdbc:postgresql://mod-fund-databases.cs.bham.ac.uk/djh639", "djh639",
+				"21jkmqarvr");
+
+		stmt = c.createStatement();
+			
+			String query = "SELECT * FROM artists1";
+			// create the java statement
+			Statement st = c.createStatement();
+			// execute the query, and get a java resultset
+			ResultSet rs = st.executeQuery(query);
+
+			while (rs.next()) {
+				
+				String album = rs.getString("album_id");
+				
+				artists.add(album);
+				
+				
+			}
+	}
+	
+	
+	
+		
+		
+		
+	
+	
+	public static void AlterTable(){
+		
+		/*
+		PreparedStatement pst = null;
+		String stm = "ALTER TABLE Artists (album_id) VALUES(?)";
+		pst = c.prepareStatement(stm);
+		pst.setString(1, album_name);
+
+		// change variable name to artist id
+		artist_name = keys.get(artist_name);
+		System.out.println(artist_name);
+		pst.setString(2, artist_name);
+
+		pst.executeUpdate();
+		*/
+		
+	}
+	
+	
+	
+	public static void main(String[] args) throws SQLException, ClassNotFoundException, IOException {
+
+		FindValuesAlbums();
+		FindValuesArtists();
+		System.out.println(keys.size());
+		System.out.println(artists.size());
+	}
+	
+	
+}

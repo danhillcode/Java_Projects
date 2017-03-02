@@ -1,0 +1,232 @@
+
+//package JdbcPostgresqlConnection;
+
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+
+import com.opencsv.CSVReader;
+
+public class Tags {
+	static ArrayList<String> tags = new ArrayList<String>();
+	static ArrayList<String> songs = new ArrayList<String>();
+	static ArrayList<String> artists = new ArrayList<String>();
+	static HashMap<String, String> keys = new HashMap<String, String>();
+	
+
+	// Inserts and creates the artists table
+	public static void statements1() throws SQLException, ClassNotFoundException, IOException {
+
+		// DATABASE CONNECTION
+
+		Connection c = null;
+		Statement stmt = null;
+		
+
+		try {
+
+			Class.forName("org.postgresql.Driver");
+			c = DriverManager.getConnection("jdbc:postgresql://mod-fund-databases.cs.bham.ac.uk/djh639", "djh639",
+					"21jkmqarvr");
+
+			stmt = c.createStatement();
+			
+			stmt.execute("DROP TABLE Tags");
+			System.out.println("Creating table in given database...");
+
+			String sql3 = "CREATE TABLE Tags " + "(id serial primary key, " + " tag_description TEXT, "
+					+ " song_ID TEXT, " + " album_ID TEXT )";
+			//need to add NOT null in last two ***
+			
+			// execute create tables
+			stmt.executeUpdate(sql3);
+			// stmt.executeUpdate(sql1);stmt.executeUpdate(sql2);stmt.executeUpdate(sql3);
+			System.out.println("Created table in given database...");
+
+			// Drop all tables
+			// stmt.execute("DROP TABLE Tags");stmt.execute("DROP TABLE
+			// Songs");stmt.execute("DROP TABLE Albums");
+			// stmt.execute("DROP TABLE Artists");
+			System.out.println("Created ID in given database...");
+		}
+
+		catch (Exception e) {
+			e.printStackTrace();
+			System.err.println("error");
+			System.exit(0);
+		}
+		System.out.println("Opened");
+
+		//table set up
+		//now enter tags
+		
+		
+		// READ IN CSV FILE
+		CSVReader reader = new CSVReader(new FileReader("lib/artists-songs-albums-tags.csv"), ',', '"', 1);
+		// Read CSV line by line and use the string array as you want
+		
+		String[] nextLine;
+		int id = 0;
+
+		try {
+			while ((nextLine = reader.readNext()) != null) {
+
+				
+				String artist_name = nextLine[1];
+				String song_name = nextLine[0];
+				//keys.put(artist_name, song_name);
+				
+				
+				
+				String tag = nextLine[3] + " " + nextLine[4] + " " + nextLine[5] + "" + nextLine[6] + " " + nextLine[7] + " "
+						+ " " + nextLine[8] + " " +
+						nextLine[9] + " " + nextLine[10] + "" + nextLine[11] + " " + nextLine[12] + " "
+						+ " " + nextLine[13] + " " +
+						nextLine[14] + " " + nextLine[15] + "" + nextLine[16] + " " + nextLine[17] + " "
+						+ " " + nextLine[18] + " " + nextLine[19] + " " + nextLine[20] + " " + nextLine[21];
+						
+				/*System.out.println(tag);
+				tags.add(tag);
+				System.out.println(song_name);
+				songs.add(song_name);
+				System.out.println(artist_name);
+				artists.add(artist_name);*/
+				
+				keys.put(song_name, tag);
+				
+				// artist_name and album_name
+				
+				
+				 
+
+				String stm = "INSERT INTO Tags (tag_description) VALUES(?)";
+				PreparedStatement pst = null;
+				pst = c.prepareStatement(stm);
+				pst.setString(1, tag);
+
+				
+				
+				// change variable name to artist id
+				//artist_name = keys.get(artist_name);
+				//System.out.println(artist_name);
+				//pst.setString(2, artist_name);
+
+				pst.executeUpdate();
+				pst.close();
+				
+				
+				//use these later for searching
+				
+
+				
+				
+			}
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+
+	}
+	
+	
+	public static void enterAlbumID(){
+		
+		Connection c1 = DriverManager
+				.getConnection("jdbc:postgresql://mod-fund-databases.cs.bham.ac.uk/djh639","djh639", "21jkmqarvr");
+
+		for(int i = 0; i < songs.size(); i++){
+		String sql =  "INSERT INTO Songs (song_name, album_id) VALUES(?, ?)";
+		PreparedStatement pst2 =  c1.prepareStatement(sql);
+		
+		//String stm = "INSERT INTO Songs (song_name, album_id) VALUES(?, ?)";
+		pst2 = c1.prepareStatement(sql);
+		pst2.setString(1, songs.get(i));
+		//OPEN
+		
+		pst2.executeUpdate(); 
+		
+	}
+	}
+	
+	
+	
+	public static void enterSongID() throws ClassNotFoundException, SQLException {
+		
+		Connection c = null;
+		Statement stmt = null;
+		
+		Class.forName("org.postgresql.Driver");
+		c = DriverManager.getConnection("jdbc:postgresql://mod-fund-databases.cs.bham.ac.uk/djh639", "djh639",
+				"21jkmqarvr");
+
+		stmt = c.createStatement();
+			
+			String query = "SELECT DISTINCT * FROM songs";
+			// create the java statement
+			Statement st = c.createStatement();
+			// execute the query, and get a java resultset
+			ResultSet rs = st.executeQuery(query);
+
+			while (rs.next()) {
+				String id1 = rs.getString("id");
+				String song = rs.getString("song_name");
+				String album_ID = rs.getString("album_id");
+				System.out.println(id1);
+				System.out.println(song);
+				System.out.println(album_ID);
+				//keys.put(artist, id1);
+				//System.out.println(keys);
+				
+				//if song and album from search match song and album in keys saved 
+				//add song_ID
+				
+				/*
+				System.out.println(tags);
+				System.out.println(songs);
+				System.out.println(artists);
+				*/
+				
+				
+				if (song == ) {
+					
+					
+		  	        String sql = "INSERT INTO Tags (song_id) VALUES(?)";
+		  	        PreparedStatement pst =  c.prepareStatement(sql);
+					
+		  	        pst = c.prepareStatement(sql);
+		  	        pst.setString(1, id1);
+		  	        pst.executeUpdate(); 
+				
+				} else {
+					System.out.println("cannot insert");
+					
+				}
+				
+				
+				
+			
+			}
+	}
+	
+	
+/*
+ * Main method to called methods in the class
+ */
+	
+	public static void main(String[] args) throws SQLException, ClassNotFoundException, IOException {
+
+		statements1();
+		enterSongID();
+	}
+}
+
