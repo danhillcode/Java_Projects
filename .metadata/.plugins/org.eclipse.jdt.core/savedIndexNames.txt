@@ -21,7 +21,6 @@ INDEX VERSION 1.129+/Users/danielhill/Documents/workspace/.metadata/.plugins/org
 905239250.index
 1824019294.index
 2016113836.index
-3960818564.index
 1941820481.index
 4083394299.index
 3645537925.index
